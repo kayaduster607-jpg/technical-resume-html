@@ -12,6 +12,8 @@
 - `images/hero.jpg`：同一封面的 README 展示导出。
 - `images/social-preview.jpg`：同一封面的 1280 × 640 社交预览导出。
 - `images/resume-preview.jpg`：由 `examples/demo-resume.html` 实际渲染；人物、单位、经历与效果均为虚构教学内容，只演示排版和条目组织。
+- `images/workflow.png`：内置 ImageGen 绘制的四阶段流程信息图；以深蓝、暖白和金色细线展示材料、深挖、价值表达与投递准备。
+- `images/workflow.jpg`：相同流程图的 README 展示导出；逻辑源见 `workflow.mmd`，生成提示词与调整记录见 [流程图设计记录](workflow-design.md)。
 
 封面使用内置 `image_gen`，没有调用 CLI/API 回退。导出仅调整文件格式和分辨率，不改变画面内容。
 
