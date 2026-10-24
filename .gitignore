@@ -1,0 +1,19 @@
+# Credentials and local configuration must stay out of the public repository.
+.env
+.env.*
+*.pem
+*.key
+
+# Dependencies, local render checks and generated delivery bundles.
+node_modules/
+__pycache__/
+*.pyc
+.skill-build/
+qa/
+output/
+*.zip
+*.skill
+
+# Operating-system files.
+.DS_Store
+Thumbs.db

@@ -1,0 +1,4 @@
+interface:
+  display_name: "技术简历深挖与 HTML"
+  short_description: "先读项目或简历并持续深挖，逐点按问题＋解决＋提升效率编写 HTML 简历"
+  default_prompt: "使用 $technical-resume-html，先读取我的项目地址或现有简历，多轮追问到能写，每个具体技术点采用问题＋解决＋提升效率，最后生成 A4 蓝色风格 HTML 简历。"

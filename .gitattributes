@@ -1,0 +1,5 @@
+# Keep text portable across Windows, macOS and Linux.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
