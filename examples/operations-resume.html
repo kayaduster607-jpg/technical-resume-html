@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>运营协调履历示例 · 虚构教学内容</title>
+  <style>
+    /* 集中维护尺寸和颜色；保留 v28 的白纸深蓝风格。 */
+    :root {
+      --text: #111827;
+      --muted: #4b5563;
+      --line: #d7dde8;
+      --accent: #174a7c;
+      --accent-dark: #0f3157;
+      --accent-soft: #edf5fb;
+      --body-size: 9.5pt;
+      --body-leading: 1.4;
+      --page-padding: 9mm 10.6mm 11mm;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: #eef2f7;
+      color: var(--text);
+      font-family: "Noto Sans CJK SC", "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      font-size: var(--body-size);
+      line-height: var(--body-leading);
+    }
+    a { color: inherit; text-underline-offset: 2px; }
+    .toolbar {
+      max-width: 210mm; margin: 12px auto; padding: 0 8px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    }
+    .toolbar button, .toolbar label {
+      padding: 8px 12px; border: 0; border-radius: 6px;
+      background: var(--accent); color: white; cursor: pointer; font: inherit;
+    }
+    .toolbar label { background: #475569; }
+    .tip, #status { color: var(--muted); font-size: 9pt; }
+    #status { width: 100%; }
+    #photoInput { display: none; }
+    .page {
+      width: 210mm; height: 297mm; padding: var(--page-padding);
+      margin: 14px auto; background: white; position: relative;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, .15);
+      /* 故意显示越界内容，避免裁字后看起来仍像排版正常。 */
+      overflow: visible;
+    }
+    .page-content { width: 100%; }
+    .page-num {
+      position: absolute; right: 10.6mm; bottom: 4.5mm;
+      color: #6b7280; font-size: 8.2pt;
+    }
+    .header {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 7px; margin-bottom: 8px;
+    }
+    .header.has-photo { display: grid; grid-template-columns: 1fr 25mm; gap: 8mm; }
+    h1 { margin: 0 0 7px; font-size: 23.5pt; line-height: 1.35; letter-spacing: 1px; }
+    .info-grid {
+      display: grid; grid-template-columns: auto 1fr auto 1fr;
+      gap: 3px 8px; background: #fbfdff; border: 1px solid #e5edf5;
+      border-radius: 6px; padding: 5px 7px; font-size: 9pt;
+    }
+    .info-label, .skill-label { color: var(--accent); font-weight: 700; }
+    .info-value { overflow-wrap: anywhere; }
+    .intent { margin-top: 5px; color: var(--accent-dark); font-weight: 700; }
+    .photo-slot {
+      width: 25mm; height: 35mm; border: 1px dashed #9ca3af;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; color: #6b7280; font-size: 8.7pt;
+    }
+    .photo-slot img { width: 100%; height: 100%; object-fit: cover; }
+    h2 {
+      margin: 9px 0 5px; padding: 3px 7px; font-size: 11pt; line-height: 1.25;
+      background: var(--accent-soft); border-left: 4px solid var(--accent);
+      color: var(--accent-dark); break-after: avoid;
+    }
+    .item { margin: 5px 0 8px; break-inside: avoid; }
+    .item-head { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: baseline; }
+    h3 { margin: 0; font-size: 10.1pt; line-height: 1.35; }
+    .role, strong { color: var(--accent-dark); }
+    .date { color: var(--muted); font-size: 8.7pt; white-space: nowrap; }
+    p { margin: 3px 0; }
+    .meta, .project-summary { color: #374151; }
+    .tech { background: #f8fafc; border: 1px solid #e7edf4; border-radius: 5px; padding: 3px 6px; }
+    .highlight-title { margin-top: 5px; font-weight: 700; }
+    ul { margin: 2px 0 0; padding-left: 17px; }
+    li { margin: 2px 0; }
+    .skills-grid { display: grid; grid-template-columns: 22mm 1fr; gap: 4px 6px; }
+    .award { border-left: 3px solid var(--accent); padding-left: 7px; margin: 6px 0; }
+    .cert-list { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; }
+    .cert { border-bottom: 1px dashed var(--line); padding-bottom: 4px; }
+    @page { size: A4; margin: 0; }
+    @media print {
+      html, body { background: white; }
+      .no-print { display: none !important; }
+      .page {
+        margin: 0; box-shadow: none; break-after: page;
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+      }
+      .page:last-child { break-after: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar no-print" aria-label="简历工具">
+    <label for="photoInput">预览本地照片</label>
+    <button id="printButton" type="button">导出 PDF</button>
+    <span class="tip">A4 · 100% 缩放 · 关闭页眉页脚；照片预览仅在当前会话有效。</span>
+    <div id="status" role="status" aria-live="polite"></div>
+  </div>
+  <input id="photoInput" class="no-print" type="file" accept="image/png,image/jpeg,image/webp">
+  <main>
+    <section class="page" aria-label="虚构运营协调履历示例">
+      <div class="page-content">
+        <header class="header has-photo">
+          <div>
+            <h1>演示人物</h1>
+            <div class="info-grid">
+              <span class="info-label">方向</span><span class="info-value">运营协调 / 项目支持</span>
+              <span class="info-label">场景</span><span class="info-value">社招 / 转岗</span>
+              <span class="info-label">资料</span><span class="info-value">虚构教学内容</span>
+              <span class="info-label">用途</span><span class="info-value">展示经历结构与版式</span>
+            </div>
+            <p class="intent">讲清工作中的问题、个人行动与可证明的改善。</p>
+          </div>
+          <div class="photo-slot">
+            <span id="photoText" data-allow-hidden>演示资料<br>非真实履历</span>
+            <img id="photoPreview" alt="演示照片" hidden data-allow-hidden>
+          </div>
+        </header>
+        <section class="section">
+          <h2>工作经历</h2>
+          <article class="item">
+            <div class="item-head"><h3>示例服务团队｜<span class="role">运营协调（虚构）</span></h3><span class="date">示例任职阶段</span></div>
+            <p class="project-summary"><strong>工作背景：</strong>围绕多渠道反馈、跨部门事项分散和交接资料不完整等问题，练习展示运营协调工作的个人贡献。</p>
+            <p class="tech"><strong>关键方法与工具：</strong>需求分组、事项台账、交付清单、责任人与验收节点。</p>
+            <p class="highlight-title">主要贡献：</p>
+            <ul>
+              <li><strong>交接标准：</strong>针对交接材料不完整、接收方反复确认的问题，梳理交付清单、责任人与验收节点，使接收方能够按统一标准核对内容，减少遗漏带来的往返沟通。</li>
+              <li><strong>需求分流：</strong>针对不同渠道的相同问题重复流转的情况，按事项类型建立记录与反馈路径，使相关人员能查到处理状态和下一步动作，避免重复分派已有人跟进的事项。</li>
+              <li><strong>异常跟进：</strong>针对阻塞事项缺少明确升级入口的问题，约定反馈条件与处理责任，结合例行复盘识别未完成事项，使团队能够定位依赖并协调后续处理。</li>
+            </ul>
+            <p class="highlight-title">整体成果：</p>
+            <p>形成交接清单、事项台账与异常跟进的表达示例；正式履历应以实际采用情况、工作记录与改前改后变化核实效果。</p>
+          </article>
+        </section>
+        <section class="section">
+          <h2>项目经历</h2>
+          <article class="item">
+            <div class="item-head"><h3>新人工作指引整理｜<span class="role">流程改进示例</span></h3><span class="date">示例项目阶段</span></div>
+            <p class="project-summary"><strong>项目目标：</strong>围绕入职初期信息分散、常见问题需要多次询问等情况，展示知识整理与跨角色协作能力。</p>
+            <ul>
+              <li><strong>信息整理：</strong>针对常用资料分散在不同渠道的问题，按工作步骤汇总入口、责任人和操作说明，使新人能够从统一指引中定位所需信息，减少重复寻找资料的步骤。</li>
+              <li><strong>持续维护：</strong>针对流程变化后旧说明继续流传的问题，明确更新责任并记录修订时间，使使用者能够核对当前版本，避免沿用已经失效的说明。</li>
+            </ul>
+          </article>
+        </section>
+        <section class="section">
+          <h2>核心能力</h2>
+          <div class="skills-grid">
+            <span class="skill-label">协作与跟进</span><span>围绕责任边界、交付节点与异常路径组织信息，推动事项可查、可接续。</span>
+            <span class="skill-label">资料与复盘</span><span>通过台账、清单和版本记录沉淀工作方法，结合实际反馈调整说明。</span>
+          </div>
+        </section>
+        <section class="section">
+          <h2>教育背景</h2>
+          <div class="item-head"><h3>示例学校｜与岗位相关的真实教育经历</h3><span class="date">示例学习阶段</span></div>
+        </section>
+        <section class="section">
+          <h2>示例说明</h2>
+          <p class="meta">本页人物、单位、经历与效果均为虚构教学内容，仅演示通用职业经历的三段式表达与 A4 排版。投递时应替换为本人已确认的事实与证据。</p>
+        </section>
+      </div>
+      <div class="page-num">1 / 1</div>
+    </section>
+  </main>
+  <script>
+    /* 照片仅作本地预览；制作单文件成品时再显式嵌入照片数据。 */
+    function setStatus(message) {
+      document.getElementById('status').textContent = message;
+    }
+
+    function showPhoto(dataUrl) {
+      const preview = document.getElementById('photoPreview');
+      if (!preview) return;
+      preview.src = dataUrl;
+      preview.hidden = false;
+      document.getElementById('photoText').hidden = true;
+    }
+
+    function handlePhotoChange(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) {
+        setStatus('请选择 PNG、JPEG 或 WebP 图片。');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => { showPhoto(reader.result); setStatus('照片已在本地预览，尚未写入 HTML 文件。'); };
+      reader.onerror = () => setStatus('照片读取失败，请重新选择。');
+      reader.readAsDataURL(file);
+    }
+
+    function findOverflowPages() {
+      return Array.from(document.querySelectorAll('.page')).flatMap((page, index) => {
+        const content = page.querySelector('.page-content');
+        const frame = page.getBoundingClientRect();
+        const style = getComputedStyle(page);
+        const footer = page.querySelector('.page-num');
+        const bottom = Math.min(frame.bottom - parseFloat(style.paddingBottom),
+          footer ? footer.getBoundingClientRect().top - 6 : frame.bottom);
+        const left = frame.left + parseFloat(style.paddingLeft);
+        const right = frame.right - parseFloat(style.paddingRight);
+        const rects = [content.getBoundingClientRect()];
+        content.querySelectorAll('*').forEach(element => {
+          if (element.getClientRects().length) rects.push(element.getBoundingClientRect());
+        });
+        return rects.some(rect => rect.bottom > bottom + 1 || rect.left < left - 1 || rect.right > right + 1)
+          ? [index + 1] : [];
+      });
+    }
+
+    async function printResume() {
+      await document.fonts.ready;
+      const overflowing = findOverflowPages();
+      if (overflowing.length) {
+        setStatus(`第 ${overflowing.join('、')} 页内容越界，请精简或重新分页后导出。`);
+        return;
+      }
+      window.print();
+    }
+
+    document.getElementById('photoInput').addEventListener('change', handlePhotoChange);
+    document.getElementById('printButton').addEventListener('click', printResume);
+  </script>
+</body>
+</html>

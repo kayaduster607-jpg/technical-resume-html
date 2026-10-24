@@ -112,7 +112,7 @@
   </div>
   <input id="photoInput" class="no-print" type="file" accept="image/png,image/jpeg,image/webp">
   <main>
-    <!-- 所有正文放入 page-content；没有实习时可改为最相关的项目经历。 -->
+    <!-- 所有正文放入 page-content；按岗位与职业阶段重排栏目、删除不适用项。 -->
     <section class="page" aria-label="简历第 1 页">
       <div class="page-content">
         <header class="header has-photo">
@@ -124,7 +124,7 @@
               <span class="info-label">项目</span><span class="info-value">【可公开项目链接】</span>
               <span class="info-label">到岗</span><span class="info-value">【到岗时间】</span>
             </div>
-            <p class="intent">求职意向：【目标岗位】</p>
+            <p class="intent">目标岗位：【目标岗位或使用场景】</p>
           </div>
           <!-- 无照片时删除整个 photo-slot，并去掉 has-photo。 -->
           <div class="photo-slot">
@@ -142,19 +142,19 @@
         <section class="section">
           <h2>专业技能</h2>
           <div class="skills-grid">
-            <span class="skill-label">【能力类别】</span><span>【技术及实际使用场景，与项目证据一致】</span>
-            <span class="skill-label">【能力类别】</span><span>【可解释、可验证的工程能力】</span>
+            <span class="skill-label">【能力类别】</span><span>【岗位能力、方法或工具及实际应用场景，与经历证据一致】</span>
+            <span class="skill-label">【能力类别】</span><span>【可解释、可验证的专业能力】</span>
           </div>
         </section>
         <section class="section">
-          <h2>实习经历</h2>
+          <h2>工作经历</h2>
           <article class="item">
-            <div class="item-head"><h3>【公司】｜<span class="role">【真实职位】</span></h3><span class="date">【起止时间】</span></div>
-            <p class="project-summary"><strong>项目背景：</strong>【服务对象、业务场景、关键问题与个人范围】</p>
-            <p class="tech"><strong>技术架构：</strong>【实际使用且能说明用途的技术】</p>
+            <div class="item-head"><h3>【单位／组织／客户】｜<span class="role">【真实职位或角色】</span></h3><span class="date">【起止时间】</span></div>
+            <p class="project-summary"><strong>工作背景：</strong>【服务对象、业务目标、关键问题与个人范围】</p>
+            <p class="tech"><strong>关键方法与工具：</strong>【实际采用的方法、流程、工具或技术；不需要时删除此行】</p>
             <p class="highlight-title">主要职责：</p>
             <ul>
-              <li><strong>【技术价值短标题】：</strong>针对【具体问题】，通过【个人动作与解决机制】，使【提升效率或最终效果，附必要验证口径】。</li>
+              <li><strong>【贡献价值短标题】：</strong>针对【具体问题】，通过【个人动作与解决方法】，使【提升效率或最终效果，附必要验证口径】。</li>
               <li><strong>【关键决策短标题】：</strong>针对【原方案的约束或损失】，采用【方案与取舍】，将【改前情况】改善为【改后效率或效果】。</li>
               <li><strong>【故障或质量短标题】：</strong>针对【故障现象与触发场景】，通过【定位与解决方法】，消除【已验证的故障或成本】。</li>
             </ul>
@@ -173,21 +173,21 @@
           <h2>项目经历</h2>
           <article class="item">
             <div class="item-head"><h3>【项目名称】｜<span class="role">【项目属性与个人角色】</span></h3><span class="date">【起止时间】</span></div>
-            <p class="project-summary"><strong>项目背景：</strong>【真实场景与开发目标；课程、个人与企业项目如实区分】</p>
-            <p class="tech"><strong>技术架构：</strong>【实际使用的技术链路】</p>
+            <p class="project-summary"><strong>项目背景：</strong>【真实场景与实施目标；课程、个人、客户与企业项目如实区分】</p>
+            <p class="tech"><strong>关键方法与工具：</strong>【实际采用的方法、流程、工具或技术；按岗位调整标签】</p>
             <p class="highlight-title">主要职责：</p>
             <ul>
               <li><strong>【核心链路】：</strong>针对【业务问题】，实现【具体处理机制与个人边界】，使【原流程获得的效率或效果改善】。</li>
-              <li><strong>【技术难点】：</strong>针对【约束或失败案例】，采用【方案与具体实现】，减少【已证实的耗时、资源、人工步骤或错误】。</li>
-              <li><strong>【工程质量】：</strong>针对【质量、排障或交付问题】，通过【测试、观测或部署机制】，实现【可验证的质量或交付效果】。</li>
+              <li><strong>【关键难点】：</strong>针对【约束或失败案例】，采用【方案与具体行动】，改善【已证实的时间、成本、质量、风险或业务效果】。</li>
+              <li><strong>【交付与质量】：</strong>针对【质量、沟通或交付问题】，通过【检查、反馈或验收方法】，实现【可验证的质量或交付效果】。</li>
             </ul>
             <p class="highlight-title">项目成果：</p>
             <ul><li>【验证过的结果及其口径，或已完成的可展示交付物】</li></ul>
           </article>
         </section>
         <section class="section">
-          <h2>竞赛与荣誉</h2>
-          <div class="award"><h3>【竞赛／奖项及级别】</h3><p>【时间、个人角色与相关技术贡献】</p></div>
+          <h2>荣誉与资质</h2>
+          <div class="award"><h3>【岗位相关荣誉／奖项及级别】</h3><p>【时间、个人角色与相关贡献；没有则删除本栏目】</p></div>
         </section>
         <section class="section">
           <h2>证书与其他</h2>
