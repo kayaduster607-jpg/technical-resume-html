@@ -28,6 +28,20 @@ Use it for engineering, product, operations, marketing, sales, design, business 
 
 <a id="example"></a>
 
+## First use: your input, the interaction, and the files you receive
+
+| You provide | Example | You receive |
+| --- | --- | --- |
+| One source of real experience | Existing resume, work notes, project material, or an accessible repository | Evidence-backed experience statements after follow-up questions |
+| Your target role and language | Operations role, Chinese, entry-level application | A role-appropriate editable HTML resume |
+| Answers about your contribution | What you personally changed, why, and what the evidence supports | A reviewed draft; PDF and layout artifacts when browser tools are available |
+
+This is a skill for an AI coding assistant, not a web server. Install the complete skill directory as described below, explicitly invoke `technical-resume-html`, and provide material plus the target role. A useful request is: “Read my existing resume, ask about my real contribution before drafting, and save the final HTML to output/resume.html. Do not invent metrics.”
+
+Answer the follow-up questions. If facts are missing, further questions are expected; installation alone does not produce a finished resume. Once the facts are sufficient, open the generated HTML in a browser, review it, and print to PDF if needed. The original material remains separate.
+
+To preview the format without using your personal data, open [the technical example](examples/demo-resume.html) or [the operations example](examples/operations-resume.html). Both use fictional content. The validation script accepts an existing HTML file and writes screenshots, report.json and resume.pdf; it does not generate experience statements from a JD.
+
 ## Make the value of an experience easier to understand
 
 This fictional cross-functional example illustrates the writing structure. Your own actions, outcomes and evidence must be established before they are used.
