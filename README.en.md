@@ -1,49 +1,78 @@
 # Technical Resume HTML
 
-An assistant skill that turns real work materials into an editable HTML resume. It reads the evidence, asks follow-up questions about personal contributions, and writes experience around the problem, the solution and the resulting improvement.
+[简体中文](README.md) | [English](README.en.md)
 
-[中文](README.md) · [Install](#install) · [First use](#first-use) · [Files and validation](#files-and-validation)
+**Establish real contributions first, then write a resume you can submit and explain.**
 
-## Install
+An assistant skill that reads resumes, work outputs, or project materials, asks follow-up questions about individual contributions, organizes experience as “problem → solution → improvement,” and produces an editable, printable HTML resume. It supports technical roles as well as operations, career changes, and internal applications.
 
-Install the entire repository as `technical-resume-html`, including templates, references and scripts. For Codex, use `~/.agents/skills/technical-resume-html/` for your account, or `.agents/skills/technical-resume-html/` inside a project. Keep any existing installation until you have compared versions.
+You do not need a polished resume to begin. Provide one source of real evidence and a target direction. When information is missing, the next step is an interview—not invented experience or numbers.
 
-```bash
-mkdir -p ~/.agents/skills
-git clone https://github.com/kayaduster607-jpg/technical-resume-html.git ~/.agents/skills/technical-resume-html
+[Install](#install-in-codex) · [Start](#start-a-resume-session) · [Outputs](#deliverables-and-layout-checks) · [Examples](#preview-the-output)
+
+## Install in Codex
+
+Install the whole repository containing SKILL.md as `technical-resume-html`. User-level location: `~/.agents/skills/technical-resume-html/`; project-level location: `.agents/skills/technical-resume-html/`. Do not copy SKILL.md alone: retain templates, references, and checking scripts.
+
+User-level installation in Windows PowerShell:
+
+```powershell
+$resumeSkillsRoot = Join-Path $env:USERPROFILE '.agents\skills'
+New-Item -ItemType Directory -Path $resumeSkillsRoot -Force | Out-Null
+git clone https://github.com/kayaduster607-jpg/technical-resume-html.git (Join-Path $resumeSkillsRoot 'technical-resume-html')
 ```
 
-Select the skill explicitly or invoke `$technical-resume-html`. Reload Codex if needed. See the [official skill documentation](https://learn.chatgpt.com/docs/build-skills) for discovery and invocation.
+If the directory already exists, compare versions and preserve existing content first. Select or enter `$technical-resume-html` in Codex after installation; reload the app if it does not appear. See the [official Skills documentation](https://learn.chatgpt.com/docs/build-skills) for paths and invocation conventions.
 
-## First use
+## Start a resume session
 
-Provide one real source: an existing resume, work summary, project report or accessible repository. Add the target role, job description if available, language and desired output path.
+Replace bracketed placeholders with your information and attach files, pasted text, or readable paths along with the invocation:
 
 ```text
-Use $technical-resume-html to prepare my English resume.
-Target: backend engineering internship.
-Sources: [attach files or provide accessible paths].
-Job description: [paste it, if available].
-Output: output/resume.html.
+使用 $technical-resume-html 帮我整理中文简历。
+目标：后端开发实习；目标 JD：[粘贴岗位要求，没有则先说明方向]
+材料：[现有简历、项目说明或工作成果的附件 / 路径]
+交付位置：output/resume.html
 
-Read the sources first. Ask about my personal contribution and evidence.
-Do not invent metrics. Confirm the experience before producing the HTML.
+先读取材料，再逐轮追问我的个人贡献与证据。
+经历按“问题、解决、改善”组织；没有依据的指标不要补写。
 ```
 
-Answer follow-up questions about the problem, your role, design choices and verified results. Missing information leads to more questions, rather than fabricated experience. Separate team outcomes from your own work, and a pilot from a production rollout.
+A complete session follows these steps:
 
-The final HTML contains editable text and print styles. Open it in a browser and check the content and pagination. PDF export and screenshots require suitable tools in the assistant environment; installing this skill alone does not install a browser.
+1. The assistant reads the material and separates established facts, points needing confirmation, and unsupported claims.
+2. You answer questions about context, role, choices, difficulties, and results. State explicitly when no statistics exist, and distinguish your contribution from team outcomes.
+3. Once evidence is sufficient, review the experience text before the assistant writes HTML to the requested location. Be ready to explain important decisions and verifiable improvements in an interview.
+4. Open the HTML in a browser and check content and print pagination. Explicitly request PDF export if needed and inspect the layout-check results.
 
-## Files and validation
+| Required input | Examples | What it establishes |
+| --- | --- | --- |
+| Source material | Any one of a resume, project repository, retrospective, or work summary | Experience facts |
+| Intended use | Role / JD, job search or internal application, Chinese or English | Selection and wording |
+| Follow-up answers | What you did, how you verified it, and evidence for outcomes | Individual contributions and credible metrics |
 
-With Node.js, Playwright and Chromium available, validate an existing resume from the skill root:
+A JD without experience material supports role analysis and an interview, not generation of factual work experience.
+
+## Deliverables and layout checks
+
+The main output is **HTML with editable native text**, such as `output/resume.html`. PDF, page screenshots, and check reports depend on the assistant's available file and browser tools. Preserve original materials and keep verification reminders outside application-ready text.
+
+With Node.js, Playwright, and Chromium already installed, check a completed resume from the skill root:
 
 ```bash
 node scripts/validate_resume.cjs output/resume.html --out output/qa
 ```
 
-The output includes page screenshots, `report.json` and `resume.pdf`. Layout failures return exit code 1. This checks layout, not whether career claims are true. See [layout requirements](references/html-layout.md).
+The output directory contains per-page screenshots, `report.json`, and `resume.pdf`; detected issues produce exit code 1. Checks cover overflow, pagination, and footer overlap, not the truth of the experience. See [layout documentation](references/html-layout.md) for environment and arguments.
 
-Preview the [technical example](examples/demo-resume.html), [operations example](examples/operations-resume.html) or [blank template](assets/resume-template.html). Example people, organizations and results are fictional teaching material.
+## Preview the output
 
-The workflow is defined in [SKILL.md](SKILL.md). Its purpose is to make credible experience easier to understand and explain, rather than to generate claims from a job description alone.
+![Actual HTML render of the operations-coordination example](docs/images/resume-preview.jpg)
+
+Open the [technical example](examples/demo-resume.html) or [operations-coordination example](examples/operations-resume.html) in a browser, or start from the [general template](assets/resume-template.html). Example people, organizations, and accomplishments are fictional teaching material demonstrating layout only.
+
+## Why interview before formatting
+
+The greatest distortions in experience are often factual: presenting team results as solo work, a pilot as a full rollout, or a suggestion as an achieved result. The skill separates these states and asks what problem was solved, why that approach was chosen, and how improvement was established, making the material useful both for applications and interviews.
+
+Writing rules are in [SKILL.md](SKILL.md), methodology in [problem-solution-efficiency.md](references/problem-solution-efficiency.md), and HTML layouts and checks in `assets/` and `scripts/`. Keep examples and delivery requirements aligned when changing the skill.
